@@ -4,6 +4,11 @@ php:
     - 7.2
     - 7.3
     - 7.4
+addons:
+    sonarcloud:
+        organization: "usernane"
+        token:
+            secure: nCs7mAO5rfbHB73dLujDDy9pxjntYTqHAbaC+zPc5VqnalAYd5Fo7bnT63+ScHNMEfytviMDh5+rX5YdvNvp55BD10B0Bvx9eMhQbrudwO20xnYPOoCBcEzjV4jco4ZlEDxwCLRDhYU5DCBxOlWc/dTSmQ++D1TYjphycm+wKlKaAQxsMfAp24zx6dGUWHN1dViH7lebHjYZeyvq6QHZAMZW2jLrKYekVDk4wzvvuZomLtCw1wpeXClRnRX26BLIMDU2Q9mZ6Mf+11sLMTSnolteZI9Ay7ySWkiyGMgAiyLw34vJTTD9UMhyn5a083QJUpsWPp9Yq7C5IdCQO3CieY3q/AuZZHX/H2mR8Eq+IQPmBza324yeq2YmQUUidtsb2mdhTKUhW5dc6ee5vi29KJ9NIfM6ebmnawY3yYnUamwKoldh4u5zaIZ+R9VsSfh7cZi33JHz/8r3rrTGaG/KnGXOQkbs+/oMFu06LBEPB+j+dp9xqYlU2u2mYBWgmrqSZG/WLeTsGTOfYFR0SbUiLQKngP4GkHkYYnpMbV6LTDE1GkxXLGvrYJw/MzpxDx7g5ZX9BEvUNkR/WyM1H7KsIhTrBZz1KR9NFqqkpZTA4AfQA5k4QL3CxPWFP5bQMjxhzl8cuFLBpbEOOrc3ZEZ6DVoV6irxVmqlq5lJJ11M6VI=
 
 before_script:
     - composer self-update
