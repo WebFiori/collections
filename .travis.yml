@@ -1,0 +1,15 @@
+language: php
+php:
+    - 5.6
+    - 7.2
+    - 7.3
+    - 7.4
+
+before_script:
+    - composer self-update
+    - composer install --prefer-source --no-interaction --dev
+script:
+    - phpunit --verbose --configuration phpunit.xml
+after_success:
+    - bash <(curl -s https://codecov.io/bash)
+    - sonar-scanner

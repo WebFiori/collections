@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit colors="true" bootstrap="tests/test.php">
+    <php>
+    </php>
+    <filter>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <file>./src/LinkedList.php</file>
+            <file>./src/Node.php</file>
+            <file>./src/Stack.php</file>
+            <file>./src/Queue.php</file>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="clover.xml"/>
+    </logging>
+    <testsuites>
+        <testsuite name="Data Structures Tests">
+            <directory>./tests/data-structures</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
