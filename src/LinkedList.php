@@ -710,15 +710,15 @@ class LinkedList extends AbstractCollection implements Iterator {
         $array = [];
 
         if ($this->size() == 1) {
-            array_push($array, $this->head->data());
+            $array[] = $this->head->data();
         } else if ($this->size() != 0) {
             $node = $this->head;
 
             while ($node->next() != null) {
-                array_push($array, $node->data());
+                $array[] = $node->data();
                 $node = $node->next();
             }
-            array_push($array, $node->data());
+            $array[] = $node->data();
         }
 
         return $array;
