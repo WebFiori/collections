@@ -524,6 +524,13 @@ class LinkedList extends AbstractCollection implements Iterator {
     /**
      * Sort the elements of the list using insertion sort algorithm.
      * 
+     * Note that sorting can be only applied to following types:
+     * <ul>
+     * <li>numerical types</li>
+     * <li>strings</li>
+     * <li>Objects that implements the interface 'webfiori\collections\Comparable'</li>
+     * </ul>
+     * 
      * @param boolean $ascending If set to true, list elements 
      * will be sorted in ascending order (From lower to higher). Else, 
      * they will be sorted in descending order (From higher to lower). Default is 
@@ -532,7 +539,9 @@ class LinkedList extends AbstractCollection implements Iterator {
      * @return boolean The method will return true if list 
      * elements have been sorted. The only cases that the method 
      * will return false is when the list has an object which does 
-     * not implement the interface Comparable or it has a mix of objects and primitive types.
+     * not implement the interface Comparable or it has a mix of objects 
+     * and primitive types. Also, the method will return false if not 
+     * all elements of the same primitive type.
      * 
      * @since 1.3
      */
@@ -540,12 +549,18 @@ class LinkedList extends AbstractCollection implements Iterator {
         $array = $this->toArray();
         $count = count($array);
         $hasObject = false;
-
+        $firstElType = $count > 0 ? gettype($array[0]) : 'N/A';
+        $numTypes = ['integer', 'double'];
         for ($i = 0 ; $i < $count ; $i++) {
             $val = $array[$i];
             $j = $i - 1;
-
-            if (gettype($val) == 'object') {
+            $elType = gettype($val);
+            if (!($elType == $firstElType)) {
+                if (!(in_array($elType, $numTypes) && in_array($firstElType, $numTypes))) {
+                    return false;
+                }
+            }
+            if ($elType == 'object') {
                 $hasObject = true;
 
                 if ($val instanceof Comparable) {
@@ -557,7 +572,13 @@ class LinkedList extends AbstractCollection implements Iterator {
                 } else {
                     return false;
                 }
-            } else if (!$hasObject) {
+            } else if ($elType == 'string') {
+                while ($j >= 0 && strcmp($array[$j], $val) > 0) {
+                    $array[$j + 1] = $array[$j];
+                    $j--;
+                }
+                $array[$j + 1] = $val;
+            } else if (in_array($elType, $numTypes)) {
                 while ($j >= 0 && $array[$j] > $val) {
                     $array[$j + 1] = $array[$j];
                     $j--;

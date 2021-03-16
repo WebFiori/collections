@@ -65,12 +65,15 @@ class LinkedListTest extends TestCase {
      */
     public function insertionSortTest02() {
         $list = new LinkedList();
-        $el00 = 'Hello';
         $el01 = 'Apple';
-        $el02 = 'Orange';
-        $el03 = 'Computer';
         $el04 = 'Bad Boy';
+        $el03 = 'Computer';
+        $el00 = 'Hello';
         $el05 = 'Nice Work';
+        $el02 = 'Orange';
+        
+        
+        
         $list->add($el00);
         $list->add($el01);
         $list->add($el02);
@@ -126,8 +129,8 @@ class LinkedListTest extends TestCase {
         $list->add($el03);
         $list->add($el04);
         $list->add($el05);
-        $expected = [$el02,$el04,$el00,$el05,$el01,$el03];
-        $this->assertTrue($list->insertionSort());
+        $expected = [$el00,$el01,$el02,$el03,$el04,$el05];
+        $this->assertFalse($list->insertionSort());
 
         for ($x = 0 ; $x < $list->size() ; $x++) {
             $this->assertEquals($expected[$x],$list->get($x));
@@ -150,8 +153,8 @@ class LinkedListTest extends TestCase {
         $list->add($el03);
         $list->add($el04);
         $list->add($el05);
-        $expected = array_reverse([$el02,$el04,$el00,$el05,$el01,$el03]);
-        $this->assertTrue($list->insertionSort(false));
+        $expected = [$el00,$el01,$el02,$el03,$el04,$el05];
+        $this->assertFalse($list->insertionSort(false));
 
         for ($x = 0 ; $x < $list->size() ; $x++) {
             $this->assertEquals($expected[$x],$list->get($x));
