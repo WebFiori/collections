@@ -3,8 +3,8 @@
 Basic data structures used by WebFiori framework.
 
 <p align="center">
-  <a href="https://travis-ci.com/github/WebFiori/collections">
-    <img src="https://travis-ci.com/WebFiori/collections.svg?branch=master">
+  <a href="https://github.com/WebFiori/collections/actions">
+    <img src="https://github.com/WebFiori/collections/workflows/Build%20PHP%207,8/badge.svg?branch=master">
   </a>
   <a href="https://codecov.io/gh/WebFiori/collections">
     <img src="https://codecov.io/gh/WebFiori/collections/branch/master/graph/badge.svg" />
