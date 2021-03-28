@@ -654,7 +654,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * @since 1.4.3 
      */
     public function next() {
-        $this->iteratorEl = $this->iteratorEl->next();
+        $this->iteratorEl = $this->iteratorEl !== null ? $this->iteratorEl->next() : null;
 
         if ($this->iteratorEl !== null) {
             return $this->iteratorEl->data();
