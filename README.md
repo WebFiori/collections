@@ -4,7 +4,7 @@ Basic data structures used by WebFiori framework.
 
 <p align="center">
   <a href="https://github.com/WebFiori/collections/actions">
-    <img src="https://github.com/WebFiori/collections/workflows/Build%20PHP%207,8/badge.svg?branch=master">
+    <img src="https://github.com/WebFiori/collections/workflows/Build%20PHP%208.1/badge.svg?branch=master">
   </a>
   <a href="https://codecov.io/gh/WebFiori/collections">
     <img src="https://codecov.io/gh/WebFiori/collections/branch/master/graph/badge.svg" />
