@@ -81,7 +81,7 @@ abstract class AbstractCollection implements Countable {
      * 
      * @since 1.0
      */
-    public function count() {
+    public function count() : int {
         return $this->size();
     }
     /**
