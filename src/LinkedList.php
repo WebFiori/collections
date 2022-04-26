@@ -298,13 +298,13 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @param mixed $el The element that will be added. It can be of any type.
      * 
-     * @return boolean true if the element is added. The method will return 
+     * @return bool true if the element is added. The method will return 
      * false only if the list accepts a limited number of elements and that 
      * number has been reached.
      * 
      * @since 1.0
      */
-    public function add(&$el) {
+    public function add(&$el) : bool {
         if ($this->validateSize()) {
             if ($this->head == null) {
                 $this->head = new Node($el);
@@ -356,7 +356,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @since 1.0
      */
-    public function contains(&$el) {
+    public function contains(&$el) : bool {
         if ($this->size() == 0) {
             return false;
         } else if ($this->size() == 1) {
@@ -384,7 +384,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @since 1.0
      */
-    public function countElement(&$el) {
+    public function countElement(&$el) : int {
         $count = 0;
 
         if ($this->size() == 1 && $this->head->data() === $el) {
@@ -402,6 +402,7 @@ class LinkedList extends AbstractCollection implements Iterator {
 
         return $count;
     }
+    #[\ReturnTypeWillChange]
     /**
      * Returns the element that the iterator is currently is pointing to.
      * 
@@ -434,7 +435,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @since 1.2
      */
-    public function indexOf($el) {
+    public function indexOf($el) : int {
         if ($this->size() == 1) {
             return $this->head->data() === $el ? 0 : -1;
         } else if ($this->size() == 0) {
@@ -481,7 +482,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * @return boolean If the element is inserted, the method will return true. 
      * If not, the method will return false.
      */
-    public function insert(&$el,$position) {
+    public function insert(&$el,$position) : bool {
         $retVal = false;
         if ($this->validateSize()) {
             $listSize = $this->size();
@@ -609,6 +610,7 @@ class LinkedList extends AbstractCollection implements Iterator {
             }
         }
     }
+    #[\ReturnTypeWillChange]
     /**
      * Returns the current node in the iterator.
      * 
@@ -634,13 +636,14 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @since 1.4.1
      */
-    public function max() {
+    public function max() : int {
         if ($this->maxEls <= 0) {
             return -1;
         }
 
         return $this->maxEls;
     }
+    #[\ReturnTypeWillChange]
     /**
      * Returns the next element in the iterator.
      * 
@@ -674,7 +677,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @since 1.2
      */
-    public function replace(&$oldEl,&$newEl) {
+    public function replace(&$oldEl,&$newEl) : bool {
         if($this->size() == 0){
             return false;
         } else if ($this->size() >= 1 && $this->head->data() === $oldEl) {
@@ -698,6 +701,7 @@ class LinkedList extends AbstractCollection implements Iterator {
 
         return false;
     }
+    #[\ReturnTypeWillChange]
     /**
      * Return iterator pointer to the first element in the list.
      * 
@@ -717,7 +721,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @since 1.0
      */
-    public function size() {
+    public function size() : int {
         return $this->size;
     }
     /**
@@ -727,7 +731,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @since 1.3
      */
-    public function toArray() {
+    public function toArray() : array {
         $array = [];
 
         if ($this->size() == 1) {
@@ -756,7 +760,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @since 1.4.3 
      */
-    public function valid() {
+    public function valid() : bool {
         return $this->iteratorEl !== null;
     }
     private function &_removeElementHelper(&$val) {

@@ -40,7 +40,7 @@ class AnyObject implements Comparable {
     public function __toString() {
         return 'Name: \''.$this->objName.'\', Number: \''.$this->objNum.'\'.';
     }
-    public function compare($other) {
+    public function compare($other) : int {
         if ($other instanceof AnyObject) {
             if ($this->objNum > $other->objNum) {
                 return 1;

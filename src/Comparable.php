@@ -48,5 +48,5 @@ interface Comparable {
      * 
      * @since 1.0
      */
-    public function compare($other);
+    public function compare($other) : int;
 }

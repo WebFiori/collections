@@ -91,7 +91,7 @@ abstract class AbstractCollection implements Countable {
      * 
      * @since 1.0
      */
-    public abstract function size();
+    public abstract function size() : int ;
     /**
      * Returns an array that contains the elements of the collection.
      * 
@@ -99,5 +99,5 @@ abstract class AbstractCollection implements Countable {
      * 
      * @since 1.0
      */
-    public abstract function toArray();
+    public abstract function toArray() : array;
 }

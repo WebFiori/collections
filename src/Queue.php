@@ -207,7 +207,7 @@ class Queue extends AbstractCollection {
      * 
      * @since 1.0
      */
-    public function max() {
+    public function max() : int {
         if ($this->max <= 0) {
             return -1;
         }
@@ -221,7 +221,7 @@ class Queue extends AbstractCollection {
      * 
      * @since 1.0
      */
-    public function size() {
+    public function size() : int {
         return $this->size;
     }
     /**
@@ -231,7 +231,7 @@ class Queue extends AbstractCollection {
      * 
      * @since 1.1.2
      */
-    public function toArray() {
+    public function toArray() : array {
         $array = [];
 
         if ($this->size() == 1) {
