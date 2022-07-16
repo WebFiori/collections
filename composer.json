@@ -11,6 +11,11 @@
         "collections",
         "data structures"
     ],
+    "autoload" :{
+        "psr-4":{
+            "webfiori\\collections\\":"webfiori\\collections"
+        }
+    },
     "require-dev": {
         "phpunit/phpunit": "^5"
     },
