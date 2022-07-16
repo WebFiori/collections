@@ -40,11 +40,12 @@ if (explode($DS, $rootDirTrimmed)[0] == 'home') {
 }
 define('ROOT', $rootDir);
 //echo 'Root Directory: \''.$rootDir.'\'.'."\n";
-require_once $rootDir.'src'.$DS.'Node.php';
-require_once $rootDir.'src'.$DS.'AbstractCollection.php';
-require_once $rootDir.'src'.$DS.'LinkedList.php';
-require_once $rootDir.'src'.$DS.'Stack.php';
-require_once $rootDir.'src'.$DS.'Queue.php';
-require_once $rootDir.'src'.$DS.'Comparable.php';
+$libDir = $rootDir.'webfiori'.$DS.'collections'.$DS;
+require_once $libDir.'Node.php';
+require_once $libDir.'AbstractCollection.php';
+require_once $libDir.'LinkedList.php';
+require_once $libDir.'Stack.php';
+require_once $libDir.'Queue.php';
+require_once $libDir.'Comparable.php';
 
 require_once $rootDir.'tests'.$DS.'AnyObject.php';
