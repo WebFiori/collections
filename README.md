@@ -31,3 +31,8 @@ Basic data structures used by WebFiori framework.
 | <a target="_blank" href="https://github.com/WebFiori/collections/actions/workflows/php80.yml"><img src="https://github.com/WebFiori/collections/workflows/Build%20PHP%208.0/badge.svg?branch=master"></a> |
 | <a target="_blank" href="https://github.com/WebFiori/collections/actions/workflows/php81.yml"><img src="https://github.com/WebFiori/collections/workflows/Build%20PHP%208.1/badge.svg?branch=master"></a> |
 | <a target="_blank" href="https://github.com/WebFiori/collections/actions/workflows/php82.yml"><img src="https://github.com/WebFiori/collections/workflows/Build%20PHP%208.2/badge.svg?branch=master"></a> |
+
+## Supported Collections
+* Linked List
+* Stack
+* Queue
