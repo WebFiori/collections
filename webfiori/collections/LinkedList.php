@@ -1,26 +1,12 @@
 <?php
-/*
- * The MIT License
+/**
+ * This file is licensed under MIT License.
  *
- * Copyright (c) 2020 Ibrahim BinAlshikh, WebFiori Collections.
+ * Copyright (c) 2020 Ibrahim BinAlshikh
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * For more information on the license, please visit:
+ * https://github.com/WebFiori/.github/blob/main/LICENSE
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
  */
 
 namespace webfiori\collections;
@@ -334,7 +320,7 @@ class LinkedList extends AbstractCollection implements Iterator {
         return false;
     }
     /**
-     * Removes all of the elements from the list.
+     * Removes all the elements from the list.
      * 
      * @since 1.1
      */
@@ -351,7 +337,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @param mixed $el The element that will be checked.
      * 
-     * @return boolean true if the element is on the list. Other than that, 
+     * @return bool true if the element is on the list. Other than that,
      * the method will return false.
      * 
      * @since 1.0
@@ -364,8 +350,8 @@ class LinkedList extends AbstractCollection implements Iterator {
         } else {
             $node = $this->head;
 
-            while ($node != null) {
-                if ($node != null && $node->data() === $el) {
+            while ($node !== null) {
+                if ($node !== null && $node->data() === $el) {
                     return true;
                 }
                 $node = $node->next();
@@ -392,7 +378,7 @@ class LinkedList extends AbstractCollection implements Iterator {
         } else {
             $node = $this->head;
 
-            while ($node != null) {
+            while ($node !== null) {
                 if ($node->data() === $el) {
                     $count++;
                 }
@@ -444,7 +430,7 @@ class LinkedList extends AbstractCollection implements Iterator {
             $tmpIndex = 0;
             $node = $this->head;
 
-            while ($node->next() != null) {
+            while ($node->next() !== null) {
                 if ($node->data() === $el) {
                     return $tmpIndex;
                 }
@@ -479,7 +465,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @param int $position The index at which the element will be inserted in.
      * 
-     * @return boolean If the element is inserted, the method will return true. 
+     * @return bool If the element is inserted, the method will return true.
      * If not, the method will return false.
      */
     public function insert(&$el,$position) : bool {
@@ -532,12 +518,12 @@ class LinkedList extends AbstractCollection implements Iterator {
      * <li>Objects that implements the interface 'webfiori\collections\Comparable'</li>
      * </ul>
      * 
-     * @param boolean $ascending If set to true, list elements 
+     * @param bool $ascending If set to true, list elements
      * will be sorted in ascending order (From lower to higher). Else, 
      * they will be sorted in descending order (From higher to lower). Default is 
      * true.
      * 
-     * @return boolean The method will return true if list 
+     * @return bool The method will return true if list
      * elements have been sorted. The only cases that the method 
      * will return false is when the list has an object which does 
      * not implement the interface Comparable or it has a mix of objects 
@@ -546,7 +532,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @since 1.3
      */
-    public function insertionSort($ascending = true) {
+    public function insertionSort(bool $ascending = true) : bool {
         $array = $this->toArray();
         $count = count($array);
         $hasObject = false;
@@ -672,7 +658,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @param mixed $newEl The element that will replace the old one.
      * 
-     * @return boolean The method will return true if replaced. 
+     * @return bool The method will return true if replaced.
      * if the element is not replaced, the method will return false.
      * 
      * @since 1.2
@@ -687,7 +673,7 @@ class LinkedList extends AbstractCollection implements Iterator {
         } else {
             $nextNode = &$this->head->next();
 
-            while ($nextNode != null) {
+            while ($nextNode !== null) {
                 $data = &$nextNode->data();
 
                 if ($data === $oldEl) {
@@ -739,7 +725,7 @@ class LinkedList extends AbstractCollection implements Iterator {
         } else if ($this->size() != 0) {
             $node = $this->head;
 
-            while ($node->next() != null) {
+            while ($node->next() !== null) {
                 $array[] = $node->data();
                 $node = $node->next();
             }
@@ -755,7 +741,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * The developer should not call it manually unless he knows what he 
      * is doing.
      * 
-     * @return boolean If there is a next element, the method 
+     * @return bool If there is a next element, the method
      * will return true. False otherwise.
      * 
      * @since 1.4.3 
@@ -767,7 +753,7 @@ class LinkedList extends AbstractCollection implements Iterator {
         $node = $this->head;
         $nextNode = &$this->head->next();
 
-        while ($nextNode != null) {
+        while ($nextNode !== null) {
             $data = &$nextNode->data();
 
             if ($data === $val) {
@@ -788,7 +774,7 @@ class LinkedList extends AbstractCollection implements Iterator {
         $nextToCurrent = $currentNode->next();
         $retVal = false;
 
-        while ($currentNode != null) {
+        while ($currentNode !== null) {
             if ($pointer == $position) {
                 $newNode = new Node($el,$nextToCurrent);
                 $currentNode->setNext($newNode);
@@ -831,11 +817,11 @@ class LinkedList extends AbstractCollection implements Iterator {
     /**
      * Checks if the list can hold more elements or not.
      * 
-     * @return boolean true if the list can hold more elements.
+     * @return bool true if the list can hold more elements.
      * 
      * @since 1.4.1
      */
-    private function validateSize() {
+    private function validateSize() : bool {
         $max = $this->max();
 
         if ($max == -1) {
