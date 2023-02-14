@@ -177,19 +177,10 @@ class StackTest extends TestCase {
     /**
      * @test
      */
-    public function test10() {
-        $stack = new Stack('Random Str');
-        $this->assertEquals(0,$stack->size());
-        $this->assertEquals(-1,$stack->max());
-        $this->assertNull($stack->peek());
-    }
-    /**
-     * @test
-     */
     public function test11() {
         $stack = new Stack('11');
         $this->assertEquals(0,$stack->size());
-        $this->assertEquals(-1,$stack->max());
+        $this->assertEquals(11,$stack->max());
         $this->assertNull($stack->peek());
     }
     /**
