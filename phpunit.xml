@@ -4,10 +4,10 @@
     </php>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <file>./src/LinkedList.php</file>
-            <file>./src/Node.php</file>
-            <file>./src/Stack.php</file>
-            <file>./src/Queue.php</file>
+            <file>./webfiori/collections/LinkedList.php</file>
+            <file>./webfiori/collections/Node.php</file>
+            <file>./webfiori/collections/Stack.php</file>
+            <file>./webfiori/collections/Queue.php</file>
         </whitelist>
     </filter>
     <logging>

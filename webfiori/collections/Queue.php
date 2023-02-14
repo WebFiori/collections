@@ -1,28 +1,14 @@
 <?php
-
-/*
- * The MIT License
+/**
+ * This file is licensed under MIT License.
  *
- * Copyright (c) 2020 Ibrahim BinAlshikh, WebFiori Collections.
+ * Copyright (c) 2020 Ibrahim BinAlshikh
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * For more information on the license, please visit:
+ * https://github.com/WebFiori/.github/blob/main/LICENSE
  *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
  */
+
 
 namespace webfiori\collections;
 
@@ -74,17 +60,18 @@ class Queue extends AbstractCollection {
      * @since 1.0 
      */
     private $tail;
+
     /**
      * Constructs a new instance of the class.
-     * 
-     * @param int $max The maximum number of elements the queue can hold. 
-     * if a negative number is given or 0, the queue will have unlimited number 
-     * of elements. Also if the given value is not an integer, the maximum will be set 
+     *
+     * @param int $max The maximum number of elements the queue can hold.
+     * if a negative number is given or 0, the queue will have unlimited number
+     * of elements. Also, if the given value is not an integer, the maximum will be set
      * to unlimited. Default is 0.
-     * 
+     *
      * @since 1.0
      */
-    public function __construct($max = 0) {
+    public function __construct(int $max = 0) {
         $this->head = null;
         $this->tail = null;
         $this->null = null;
@@ -145,14 +132,14 @@ class Queue extends AbstractCollection {
      * @param mixed $el The element that will be added. If it is null, the 
      * method will not add it.
      * 
-     * @return boolean The method will return true if the element is added. 
+     * @return bool The method will return true if the element is added.
      * The method will return false only in two cases, If the maximum 
      * number of elements is reached and trying to add new one or the given element 
      * is null.
      * 
      * @since 1.1.2
      */
-    public function add(&$el) {
+    public function add(&$el) : bool {
         return $this->enqueue($el);
     }
     /**
@@ -161,14 +148,14 @@ class Queue extends AbstractCollection {
      * @param mixed $el The element that will be added. If it is null, the 
      * method will not add it.
      * 
-     * @return boolean The method will return true if the element is added. 
+     * @return bool The method will return true if the element is added.
      * The method will return false only in two cases, If the maximum 
      * number of elements is reached and trying to add new one or the given element 
      * is null.
      * 
      * @since 1.0
      */
-    public function enqueue($el) {
+    public function enqueue($el) : bool {
         if ($this->validateSize() && $el !== null) {
             if ($this->size() == 0) {
                 $this->head = new Node($el);
@@ -240,7 +227,7 @@ class Queue extends AbstractCollection {
             if ($this->size() != 0) {
                 $node = $this->head;
 
-                while ($node->next() != null) {
+                while ($node->next() !== null) {
                     $array[] = $node->data();
                     $node = $node->next();
                 }
@@ -253,11 +240,11 @@ class Queue extends AbstractCollection {
     /**
      * Checks if the queue can hold more elements or not.
      * 
-     * @return boolean true if the queue can hold more elements.
+     * @return bool true if the queue can hold more elements.
      * 
      * @since 1.0
      */
-    private function validateSize() {
+    private function validateSize() : bool {
         $maxEls = $this->max();
 
         if ($maxEls == -1) {
