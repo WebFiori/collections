@@ -18,6 +18,7 @@ use Countable;
  * @version 1.0
  */
 abstract class AbstractCollection implements Countable {
+    public static $NULL = null;
     /**
      * Returns a string that represents the collection and its element.
      * 

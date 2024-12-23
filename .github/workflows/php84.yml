@@ -1,12 +1,13 @@
-name: Build PHP 8.1
+name: Build PHP 8.4
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, dev ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, dev ]
 
 jobs:
+  
   test:
     runs-on: ${{ matrix.os }} 
     
@@ -14,7 +15,7 @@ jobs:
       fail-fast: true
       matrix: 
         os: [ ubuntu-latest ]
-        php: [8.1]
+        php: [8.4]
             
     name: PHP${{matrix.php}} - ${{matrix.os}}
     
@@ -27,7 +28,9 @@ jobs:
         with:
           php-version: ${{ matrix.php }} 
           extensions: mysqli, mbstring, sqlsrv
-          tools: phpunit:9.5.20, composer
+          tools: phpunit:9.5.20, composer, symplify/easy-coding-standard:12.0.6, phpbench/phpbench:1.2.14
+          
+     
           
       - name: Install Dependencies
         run: composer install --prefer-dist --no-interaction --no-dev
@@ -39,3 +42,20 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+        
+  
+  release_prod:
+    name: Prepare Production Release Branch / Publish Release
+    needs:
+      - "test"
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: php
+          config-file: release-please-config.json
+          token: ${{ secrets.GITHUB_TOKEN }}
+        
+      
