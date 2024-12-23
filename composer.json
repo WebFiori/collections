@@ -2,7 +2,7 @@
     "name": "webfiori/collections",
     "description": "Basic collections set used by WebFiori.",
     "type":"library",
-    "virsion":"1.1.4",
+    "version":"1.1.4",
     "require": {
         "php": ">=7.0"
     },
