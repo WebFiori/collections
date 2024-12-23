@@ -7,9 +7,10 @@ on:
     branches: [ master ]
 
 jobs:
+  
   test:
     runs-on: ${{ matrix.os }} 
-
+    
     strategy: 
       fail-fast: true
       matrix: 
@@ -20,23 +21,33 @@ jobs:
     
     steps: 
       - name: Clone Repo
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }} 
           extensions: mysqli, mbstring, sqlsrv
-          tools: phpunit:9.5.20, composer
+          tools: phpunit:9.5.20, composer, symplify/easy-coding-standard:12.0.6, phpbench/phpbench:1.2.14
           
-      - name: Shutdown Ubuntu MySQL
-        run: sudo service mysql stop
-         
+     
+          
       - name: Install Dependencies
-        run: composer install --prefer-source --no-interaction --no-dev
+        run: composer install --prefer-dist --no-interaction --no-dev
       
       - name: Execute Tests
-        run: phpunit
+        run: phpunit --configuration tests/phpunit.xml
         
       - name: CodeCov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+      
+      - name: SonarCloud Code Scan
+        uses: sonarsource/sonarqube-scan-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
+        
+      

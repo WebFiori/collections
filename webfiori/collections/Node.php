@@ -51,7 +51,7 @@ class Node {
      * 
      * @since 1.0
      */
-    public function __construct(&$data,&$next = null) {
+    public function __construct(mixed &$data, ?Node &$next) {
         $this->setData($data);
         $this->setNext($next);
     }
@@ -73,7 +73,7 @@ class Node {
      * 
      * @since 1.0
      */
-    public function &next() {
+    public function &next() : ?Node {
         return $this->next;
     }
     /**
@@ -85,7 +85,7 @@ class Node {
      * 
      * @since 1.0
      */
-    public function setData(&$data) {
+    public function setData(mixed &$data) {
         $this->data = $data;
     }
     /**
@@ -99,10 +99,10 @@ class Node {
      * 
      * @since 1.0
      */
-    public function setNext(&$next) {
+    public function setNext(?Node &$next) {
         if ($next instanceof Node) {
             $this->next = $next;
-        } else if ($next == null) {
+        } else if ($next === null) {
             $this->next = null;
         }
     }

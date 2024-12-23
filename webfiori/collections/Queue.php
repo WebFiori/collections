@@ -158,12 +158,12 @@ class Queue extends AbstractCollection {
     public function enqueue($el) : bool {
         if ($this->validateSize() && $el !== null) {
             if ($this->size() == 0) {
-                $this->head = new Node($el);
+                $this->head = new Node($el, self::$NULL);
                 $this->size++;
 
                 return true;
             } else if ($this->size() == 1) {
-                $this->tail = new Node($el);
+                $this->tail = new Node($el, self::$NULL);
                 $this->head->setNext($this->tail);
                 $this->size++;
 
@@ -174,7 +174,7 @@ class Queue extends AbstractCollection {
                 while ($node->next() !== null) {
                     $node = $node->next();
                 }
-                $this->tail = new Node($el);
+                $this->tail = new Node($el, self::$NULL);
                 $node->setNext($this->tail);
                 $this->size++;
 
