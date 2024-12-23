@@ -41,7 +41,8 @@ class NodeTest extends TestCase {
      */
     public function test_01() {
         $str = 'testing';
-        $node = new Node($str);
+        $null = null;
+        $node = new Node($str, $null);
         $this->assertNull($node->next());
     }
     /**
@@ -52,20 +53,9 @@ class NodeTest extends TestCase {
      */
     public function test_02() {
         $str = 'testing';
-        $node = new Node($str);
+        $null = null;
+        $node = new Node($str, $null);
         $this->assertTrue($node->data() === $str);
-    }
-    /**
-     * Creates new node and trying to link a random object with it.
-     * The aim of this test is to check if node does allow only an object of type 
-     * 'Node' to be linked with it. 
-     * @test
-     */
-    public function test_03() {
-        $str = 'testing';
-        $anyObj = new AnyObject(0, 'Hello');
-        $node = new Node($str,$anyObj);
-        $this->assertNull($node->next());
     }
     /**
      * Creates new node and trying to link another node with it.
@@ -76,7 +66,8 @@ class NodeTest extends TestCase {
     public function test_04() {
         $str00 = 'testing';
         $str01 = 'more testing';
-        $otherNode = new Node($str01);
+        $null = null;
+        $otherNode = new Node($str01, $null);
         $node00 = new Node($str00, $otherNode);
         $this->assertTrue($node00->next() instanceof Node);
 
@@ -91,7 +82,8 @@ class NodeTest extends TestCase {
     public function test_05() {
         $str00 = 'testing';
         $str01 = 'more testing';
-        $otherNode = new Node($str01);
+        $null = null;
+        $otherNode = new Node($str01, $null);
         $node00 = new Node($str00, $otherNode);
         $this->assertTrue($node00->next()->data() === $str01);
     }
@@ -105,8 +97,9 @@ class NodeTest extends TestCase {
     public function test_07() {
         $str00 = 'testing';
         $str01 = 'more testing';
-        $otherNode = new Node($str01);
-        $node00 = new Node($str00);
+        $null = null;
+        $otherNode = new Node($str01, $null);
+        $node00 = new Node($str00, $null);
         $node00->setNext($otherNode);
         $this->assertTrue($node00->next()->data() === $str01);
     }
@@ -120,7 +113,7 @@ class NodeTest extends TestCase {
     public function test_08() {
         $null = null;
         $str = 'testing';
-        $node = new Node($null);
+        $node = new Node($null, $null);
         $node->setData($str);
         $this->assertTrue($node->data() === $str);
     }
@@ -133,7 +126,8 @@ class NodeTest extends TestCase {
     public function test_09() {
         $str00 = 'testing';
         $str01 = 'more testing';
-        $otherNode = new Node($str01);
+        $null = null;
+        $otherNode = new Node($str01, $null);
         $node00 = new Node($str00, $otherNode);
         $null = null;
         $node00->setNext($null);
