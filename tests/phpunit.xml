@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="tests/test.php">
+<phpunit colors="true" bootstrap="bootstrap.php">
     <php>
     </php>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <file>./webfiori/collections/LinkedList.php</file>
-            <file>./webfiori/collections/Node.php</file>
-            <file>./webfiori/collections/Stack.php</file>
-            <file>./webfiori/collections/Queue.php</file>
+            <file>../webfiori/collections/LinkedList.php</file>
+            <file>../webfiori/collections/Node.php</file>
+            <file>../webfiori/collections/Stack.php</file>
+            <file>../webfiori/collections/Queue.php</file>
         </whitelist>
     </filter>
     <logging>
@@ -15,7 +15,7 @@
     </logging>
     <testsuites>
         <testsuite name="Data Structures Tests">
-            <directory>./tests/data-structures</directory>
+            <directory>/data-structures</directory>
         </testsuite>
     </testsuites>
 </phpunit>
