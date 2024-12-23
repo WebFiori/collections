@@ -1,8 +1,8 @@
 {
     "name": "webfiori/collections",
     "description": "Basic collections set used by WebFiori.",
-    "type":"library",
-    "virsion":"1.1.4",
+    "type": "library",
+    "virsion": "1.1.4",
     "require": {
         "php": ">=7.0"
     },
@@ -13,9 +13,9 @@
         "collections",
         "data structures"
     ],
-    "autoload" :{
-        "psr-4":{
-            "webfiori\\collections\\":"webfiori/collections/"
+    "autoload": {
+        "psr-4": {
+            "webfiori\\collections\\": "webfiori/collections/"
         }
     },
     "require-dev": {
