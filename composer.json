@@ -4,7 +4,7 @@
     "type":"library",
     "version":"1.1.4",
     "require": {
-        "php": ">=7.0"
+        "php": ">=8.1"
     },
     "keywords": [
         "library",
