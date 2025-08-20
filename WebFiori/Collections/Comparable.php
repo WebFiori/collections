@@ -8,7 +8,7 @@
  * https://github.com/WebFiori/.github/blob/main/LICENSE
  *
  */
-namespace webfiori\collections;
+namespace WebFiori\Collections;
 
 /**
  * An interface that is used to compare objects. It is used by the class 

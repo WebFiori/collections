@@ -10,7 +10,7 @@
  */
 
 
-namespace webfiori\collections;
+namespace WebFiori\Collections;
 
 /**
  * A class that represents a queue data structure.

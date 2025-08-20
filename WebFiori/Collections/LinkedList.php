@@ -9,7 +9,7 @@
  *
  */
 
-namespace webfiori\collections;
+namespace WebFiori\Collections;
 
 use Iterator;
 /**
@@ -515,7 +515,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * <ul>
      * <li>numerical types</li>
      * <li>strings</li>
-     * <li>Objects that implements the interface 'webfiori\collections\Comparable'</li>
+     * <li>Objects that implements the interface 'WebFiori\Collections\Comparable'</li>
      * </ul>
      * 
      * @param bool $ascending If set to true, list elements

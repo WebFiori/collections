@@ -15,7 +15,7 @@
     ],
     "autoload" :{
         "psr-4":{
-            "webfiori\\collections\\":"webfiori/collections/"
+            "WebFiori\\Collections\\":"WebFiori/Collections/"
         }
     },
     "require-dev": {

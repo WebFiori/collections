@@ -10,7 +10,7 @@
  */
 
 
-namespace webfiori\collections;
+namespace WebFiori\Collections;
 
 /**
  * A singly linked node that can be used to construct different data structures.
