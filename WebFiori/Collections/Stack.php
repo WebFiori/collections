@@ -15,36 +15,30 @@ namespace WebFiori\Collections;
  * A class that represents a stack data structure.
  *
  * @author Ibrahim
- * @version 1.1.2
  */
 class Stack extends AbstractCollection {
     /**
      * The bottom node of the stack.
-     * @var Node
-     * @since 1.0 
+     * @var Node|null
      */
     private $head;
     /**
      * The maximum number of elements the stack can hold.
      * @var int
-     * @since 1.0 
      */
     private $max;
     /**
      * A null guard for the methods that return null reference.
-     * @since 1.1
      */
     private $null;
     /**
      * The number of elements in the stack.
-     * @var Node
-     * @since 1.0 
+     * @var int
      */
     private $size;
     /**
      * The top node of the stack.
-     * @var Node
-     * @since 1.0 
+     * @var Node|null
      */
     private $tail;
     /**
@@ -74,8 +68,6 @@ class Stack extends AbstractCollection {
      * 
      * @return mixed The element at the top. If the stack is empty, the method 
      * will return null.
-     * 
-     * @since 1.0
      */
     public function &peek() {
         if ($this->size() == 1) {
@@ -93,8 +85,6 @@ class Stack extends AbstractCollection {
      * 
      * @return mixed The element after removal from the stack. If the stack is 
      * empty, the method will return null.
-     * 
-     * @since 1.0
      */
     public function &pop() {
         if ($this->size() == 0) {
@@ -129,8 +119,6 @@ class Stack extends AbstractCollection {
      * negative number, the method will return -1 which indicates that 
      * the stack can have infinite number of elements. Other than that, 
      * the method will return the maximum number of elements.
-     * 
-     * @since 1.0
      */
     public function max() : int {
         if ($this->max <= 0) {
@@ -149,8 +137,6 @@ class Stack extends AbstractCollection {
      * The method will return false only in two cases, If the maximum 
      * number of elements is reached and trying to add new one or the given element 
      * is null.
-     * 
-     * @since 1.0
      */
     public function add(&$el) : bool {
         return $this->push($el);
@@ -165,8 +151,6 @@ class Stack extends AbstractCollection {
      * The method will return false only in two cases, If the maximum 
      * number of elements is reached and trying to add new one or the given element 
      * is null.
-     * 
-     * @since 1.0
      */
     public function push($el) : bool {
         if ($el !== null && $this->validateSize()) {
@@ -198,8 +182,6 @@ class Stack extends AbstractCollection {
      * Returns the number of elements in the stack.
      * 
      * @return int The number of elements in the stack.
-     * 
-     * @since 1.0
      */
     public function size() : int {
         return $this->size;
@@ -209,8 +191,6 @@ class Stack extends AbstractCollection {
      * Returns an indexed array that contains the elements of the stack.
      * 
      * @return array An indexed array that contains the elements of the stack.
-     * 
-     * @since 1.1.2
      */
     public function toArray() : array {
         $elsArray = [];
@@ -235,8 +215,6 @@ class Stack extends AbstractCollection {
      * Checks if the stack can hold more elements or not.
      * 
      * @return bool true if the stack can hold more elements.
-     * 
-     * @since 1.0
      */
     private function validateSize() : bool {
         $maxSize = $this->max();

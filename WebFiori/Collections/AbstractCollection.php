@@ -15,7 +15,6 @@ use Countable;
  * A base class that can be used to create different collections.
  *
  * @author Ibrahim
- * @version 1.0
  */
 abstract class AbstractCollection implements Countable {
     public static $NULL = null;
@@ -55,18 +54,14 @@ abstract class AbstractCollection implements Countable {
      * 
      * @return bool The method should be implemented in a way that it returns
      * true if the element is added and returns false otherwise.
-     * 
-     * @since 1.0
      */
     public abstract function add(&$el);
     /**
      * Returns the number of elements in the collection.
      * 
-     * This one is similar to calling the method "AbstractCollection::<a href="#size">size()</a>".
+     * This one is similar to calling the method AbstractCollection::size().
      * 
      * @return int Number of elements in the collection.
-     * 
-     * @since 1.0
      */
     public function count() : int {
         return $this->size();
@@ -75,16 +70,12 @@ abstract class AbstractCollection implements Countable {
      * Returns the number of elements in the collection.
      * 
      * @return int The number of elements in the collection.
-     * 
-     * @since 1.0
      */
     public abstract function size() : int ;
     /**
      * Returns an array that contains the elements of the collection.
      * 
      * @return array An array that contains the elements of the collection.
-     * 
-     * @since 1.0
      */
     public abstract function toArray() : array;
 }
