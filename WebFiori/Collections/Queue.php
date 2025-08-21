@@ -10,7 +10,7 @@
  */
 
 
-namespace webfiori\collections;
+namespace WebFiori\Collections;
 
 /**
  * A class that represents a queue data structure.
@@ -19,14 +19,11 @@ namespace webfiori\collections;
  * be the first element to come out (FIFO queue).
  * 
  * @author Ibrahim
- * 
- * @version 1.1.2
  */
 class Queue extends AbstractCollection {
     /**
      * The first element in the queue.
-     * @var Node
-     * @since 1.0 
+     * @var Node|null
      */
     private $head;
     /**
@@ -34,30 +31,22 @@ class Queue extends AbstractCollection {
      * 
      * @var int If the value is 0 or a negative number, the maximum number of 
      * in the queue will be unlimited.
-     * 
-     * @since 1.0 
      */
     private $max;
     /**
      * A null guard for the methods that return null reference.
-     * 
-     * @since 1.1
      */
     private $null;
     /**
      * The number of elements in the queue.
      * 
      * @var int
-     * 
-     * @since 1.0 
      */
     private $size;
     /**
      * The last queued element.
      * 
-     * @var Node
-     * 
-     * @since 1.0 
+     * @var Node|null
      */
     private $tail;
 
@@ -68,8 +57,6 @@ class Queue extends AbstractCollection {
      * if a negative number is given or 0, the queue will have unlimited number
      * of elements. Also, if the given value is not an integer, the maximum will be set
      * to unlimited. Default is 0.
-     *
-     * @since 1.0
      */
     public function __construct(int $max = 0) {
         $this->head = null;
@@ -90,8 +77,6 @@ class Queue extends AbstractCollection {
      * 
      * @return mixed The element at the top. If the queue is empty, the method 
      * will return null.
-     * 
-     * @since 1.0
      */
     public function &peek() {
         if ($this->size() >= 1) {
@@ -105,8 +90,6 @@ class Queue extends AbstractCollection {
      * 
      * @return mixed The element after removal from the queue. If the queue is 
      * empty, the method will return null.
-     * 
-     * @since 1.0
      */
     public function &dequeue() {
         if ($this->size > 1) {
@@ -136,8 +119,6 @@ class Queue extends AbstractCollection {
      * The method will return false only in two cases, If the maximum 
      * number of elements is reached and trying to add new one or the given element 
      * is null.
-     * 
-     * @since 1.1.2
      */
     public function add(&$el) : bool {
         return $this->enqueue($el);
@@ -152,8 +133,6 @@ class Queue extends AbstractCollection {
      * The method will return false only in two cases, If the maximum 
      * number of elements is reached and trying to add new one or the given element 
      * is null.
-     * 
-     * @since 1.0
      */
     public function enqueue($el) : bool {
         if ($this->validateSize() && $el !== null) {
@@ -191,8 +170,6 @@ class Queue extends AbstractCollection {
      * negative number, the method will return -1 which indicates 
      * that the queue can have any number of elements. Other than that, 
      * the method will return the maximum number of elements.
-     * 
-     * @since 1.0
      */
     public function max() : int {
         if ($this->max <= 0) {
@@ -205,8 +182,6 @@ class Queue extends AbstractCollection {
      * Returns the number of elements in the queue.
      * 
      * @return int The number of elements in the queue.
-     * 
-     * @since 1.0
      */
     public function size() : int {
         return $this->size;
@@ -215,8 +190,6 @@ class Queue extends AbstractCollection {
      * Returns an indexed array that contains the elements of the queue.
      * 
      * @return array An indexed array that contains the elements of the queue.
-     * 
-     * @since 1.1.2
      */
     public function toArray() : array {
         $array = [];
@@ -241,8 +214,6 @@ class Queue extends AbstractCollection {
      * Checks if the queue can hold more elements or not.
      * 
      * @return bool true if the queue can hold more elements.
-     * 
-     * @since 1.0
      */
     private function validateSize() : bool {
         $maxEls = $this->max();

@@ -22,10 +22,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace webfiori\collections\tests;;
+namespace WebFiori\Collections\Tests;
 
-use webfiori\collections\Node;
-use webfiori\collections\tests\AnyObject;
+use WebFiori\Collections\Node;
+use WebFiori\Collections\Tests\AnyObject;
 use PHPUnit\Framework\TestCase;
 /**
  * A test class for the class 'Node'

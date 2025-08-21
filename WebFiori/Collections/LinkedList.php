@@ -9,60 +9,47 @@
  *
  */
 
-namespace webfiori\collections;
+namespace WebFiori\Collections;
 
 use Iterator;
 /**
  * A class that represents a linked list data structure.
  *
  * @author Ibrahim 
- * @version 1.4.3
  */
 class LinkedList extends AbstractCollection implements Iterator {
     /**
      * The first node in the list.
      * 
-     * @var Node
-     * 
-     * @since 1.0 
+     * @var Node|null
      */
     private $head;
     /**
      * A node which is used for iterator related methods.
      * 
-     * @var Node
-     * 
-     * @since 1.4.3 
+     * @var Node|null
      */
     private $iteratorEl;
     /**
      * The maximum number of elements the list can have.
      * 
      * @var int 
-     * 
-     * @since 1.4.1
      */
     private $maxEls;
     /**
      * A null guard for the methods that return null reference.
-     * 
-     * @since 1.4
      */
     private $null;
     /**
      * The number of elements in the node.
      * 
      * @var int
-     * 
-     * @since 1.0 
      */
     private $size;
     /**
      * The last node in the list.
      * 
-     * @var Node 
-     * 
-     * @since 1.0
+     * @var Node|null 
      */
     private $tail;
     /**
@@ -71,7 +58,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * @param int $max The maximum number of elements that the list can hold. 
      * If 0 or a negative number is given, the list will be able to hold 
      * unlimited number of elements.
-     * 
      */
     public function __construct($max = 0) {
         $this->null = null;
@@ -88,11 +74,11 @@ class LinkedList extends AbstractCollection implements Iterator {
     /**
      * Returns the element at the specified index.
      * 
+     * @param int $index The index of the element to retrieve.
+     * 
      * @return mixed The element at the specified index. If the list 
      * is empty or the given index is out of list bounds, The method will 
      * return null.
-     * 
-     * @since 1.1
      */
     public function &get($index) {
         if (gettype($index) == 'integer' && $index < $this->size() && $index > -1) {
@@ -127,8 +113,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return mixed The method will return The element after removal if the given element 
      * is removed. Other than that, the method will return null.
-     * 
-     * @since 1.0
      */
     public function &removeElement(&$val) {
         if ($this->size() == 1) {
@@ -152,8 +136,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return mixed If the list has elements, the last element is returned. 
      * If the list is empty, the method will return null.
-     * 
-     * @since 1.0
      */
     public function &removeLast() {
         if ($this->size() == 1) {
@@ -181,8 +163,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return mixed If the list has elements, the first element is returned. 
      * If the list is empty, the method will return null.
-     * 
-     * @since 1.0
      */
     public function &removeFirst() {
         if ($this->size() == 1) {
@@ -213,8 +193,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * @param int $index The index of the element.
      * 
      * @return mixed The element that was removed. null if no element is removed.
-     * 
-     * @since 1.0
      */
     public function &remove($index) {
         if (gettype($index) == 'integer' && $index < $this->size() && $index > -1) {
@@ -249,8 +227,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return mixed The first element that was added to the list. If the list 
      * is empty, The method will return null.
-     * 
-     * @since 1.1
      */
     public function &getFirst() {
         if ($this->size() >= 1) {
@@ -265,8 +241,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return mixed The last element that was added to the list. If the list 
      * is empty, The method will return null.
-     * 
-     * @since 1.1
      */
     public function &getLast() {
         if ($this->size() == 1) {
@@ -287,8 +261,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * @return bool true if the element is added. The method will return 
      * false only if the list accepts a limited number of elements and that 
      * number has been reached.
-     * 
-     * @since 1.0
      */
     public function add(&$el) : bool {
         if ($this->validateSize()) {
@@ -321,8 +293,6 @@ class LinkedList extends AbstractCollection implements Iterator {
     }
     /**
      * Removes all the elements from the list.
-     * 
-     * @since 1.1
      */
     public function clear() {
         $this->head = null;
@@ -339,8 +309,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return bool true if the element is on the list. Other than that,
      * the method will return false.
-     * 
-     * @since 1.0
      */
     public function contains(&$el) : bool {
         if ($this->size() == 0) {
@@ -367,8 +335,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return int The number of times the element has appeared on the list. If 
      * the element does not exist, 0 is returned.
-     * 
-     * @since 1.0
      */
     public function countElement(&$el) : int {
         $count = 0;
@@ -397,8 +363,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * is doing.
      * 
      * @return mixed The element that the iterator is currently is pointing to.
-     * 
-     * @since 1.4.3 
      */
     public function current() {
         if ($this->iteratorEl !== null) {
@@ -418,8 +382,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return int The index of the element if found. If the list does not contain 
      * the element or is empty, the method will return -1.
-     * 
-     * @since 1.2
      */
     public function indexOf($el) : int {
         if ($this->size() == 1) {
@@ -515,7 +477,7 @@ class LinkedList extends AbstractCollection implements Iterator {
      * <ul>
      * <li>numerical types</li>
      * <li>strings</li>
-     * <li>Objects that implements the interface 'webfiori\collections\Comparable'</li>
+     * <li>Objects that implements the interface 'WebFiori\Collections\Comparable'</li>
      * </ul>
      * 
      * @param bool $ascending If set to true, list elements
@@ -529,8 +491,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * not implement the interface Comparable or it has a mix of objects 
      * and primitive types. Also, the method will return false if not 
      * all elements of the same primitive type.
-     * 
-     * @since 1.3
      */
     public function insertionSort(bool $ascending = true) : bool {
         $array = $this->toArray();
@@ -579,6 +539,12 @@ class LinkedList extends AbstractCollection implements Iterator {
         
         return true;
     }
+    /**
+     * Helper method for insertion sort.
+     * 
+     * @param bool $ascending Sort order.
+     * @param array $array Sorted array.
+     */
     private function _insertionSortHelper($ascending, $array) {
         while ($this->size() != 0) {
             $this->remove(0);
@@ -606,8 +572,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return Node|null An object of type 'Node' or null if the list is empty or 
      * the iterator is finished.
-     * 
-     * @since 1.4.3 
      */
     public function key() {
         return $this->iteratorEl;
@@ -619,8 +583,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * negative number, the method will return -1 which indicates 
      * that the list can have any number of elements. Other than that, 
      * the method will return the maximum number of elements.
-     * 
-     * @since 1.4.1
      */
     public function max() : int {
         if ($this->maxEls <= 0) {
@@ -639,8 +601,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return mixed|null The next element in the iterator. If the iterator is 
      * finished or the list is empty, the method will return null.
-     * 
-     * @since 1.4.3 
      */
     public function next() {
         $this->iteratorEl = $this->iteratorEl !== null ? $this->iteratorEl->next() : null;
@@ -660,8 +620,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return bool The method will return true if replaced.
      * if the element is not replaced, the method will return false.
-     * 
-     * @since 1.2
      */
     public function replace(&$oldEl,&$newEl) : bool {
         if($this->size() == 0){
@@ -694,8 +652,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * This method is only used if the list is used in a 'foreach' loop. 
      * The developer should not call it manually unless he knows what he 
      * is doing.
-     * 
-     * @since 1.4.3 
      */
     public function rewind() {
         $this->iteratorEl = $this->head;
@@ -704,8 +660,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * Returns the number of elements in the list.
      * 
      * @return int The number of elements in the list.
-     * 
-     * @since 1.0
      */
     public function size() : int {
         return $this->size;
@@ -714,8 +668,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * Returns an array that contains the elements of the list.
      * 
      * @return array An array that contains the elements of the list.
-     * 
-     * @since 1.3
      */
     public function toArray() : array {
         $array = [];
@@ -743,12 +695,17 @@ class LinkedList extends AbstractCollection implements Iterator {
      * 
      * @return bool If there is a next element, the method
      * will return true. False otherwise.
-     * 
-     * @since 1.4.3 
      */
     public function valid() : bool {
         return $this->iteratorEl !== null;
     }
+    /**
+     * Helper method to remove an element from the list.
+     * 
+     * @param mixed $val The value to remove.
+     * 
+     * @return mixed The removed element or null.
+     */
     private function &_removeElementHelper(&$val) {
         $node = $this->head;
         $nextNode = &$this->head->next();
@@ -768,6 +725,14 @@ class LinkedList extends AbstractCollection implements Iterator {
 
         return $this->null;
     }
+    /**
+     * Helper method to insert element in the middle of the list.
+     * 
+     * @param mixed $el The element to insert.
+     * @param int $position The position to insert at.
+     * 
+     * @return bool True if inserted successfully.
+     */
     private function _insertMiddle(&$el,&$position) {
         $pointer = 1;
         $currentNode = $this->head;
@@ -793,6 +758,12 @@ class LinkedList extends AbstractCollection implements Iterator {
 
         return $retVal;
     }
+    /**
+     * Helper method to insert element at the start of the list.
+     * 
+     * @param mixed $el The element to insert.
+     * @param bool $noTail Whether to update tail pointer.
+     */
     private function _insertStart(&$el, $noTail = true) {
         $newNode = new Node($el, $this->head);
         $this->head = $newNode;
@@ -806,8 +777,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * Reduce the size of the list.
      * 
      * called after removing an element.
-     * 
-     * @since 1.3
      */
     private function _reduceSize() {
         if ($this->size > 0) {
@@ -818,8 +787,6 @@ class LinkedList extends AbstractCollection implements Iterator {
      * Checks if the list can hold more elements or not.
      * 
      * @return bool true if the list can hold more elements.
-     * 
-     * @since 1.4.1
      */
     private function validateSize() : bool {
         $max = $this->max();

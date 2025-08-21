@@ -8,15 +8,13 @@
  * https://github.com/WebFiori/.github/blob/main/LICENSE
  *
  */
-namespace webfiori\collections;
+namespace WebFiori\Collections;
 
 /**
  * An interface that is used to compare objects. It is used by the class 
  * LinkedList's sorting method in order to compare objects.
  * 
  * @author Ibrahim
- * 
- * @version 1.0
  */
 interface Comparable {
     /**
@@ -31,8 +29,6 @@ interface Comparable {
      * with.
      * 
      * @return int Negative value, 0 or positive value.
-     * 
-     * @since 1.0
      */
     public function compare($other) : int;
 }

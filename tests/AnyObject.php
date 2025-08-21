@@ -22,9 +22,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-namespace webfiori\collections\tests;
+namespace WebFiori\Collections\Tests;
 
-use webfiori\collections\Comparable;
+use WebFiori\Collections\Comparable;
 /**
  * An object for testing some of data structures functionality.
  *

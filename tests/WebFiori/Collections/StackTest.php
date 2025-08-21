@@ -1,8 +1,8 @@
 <?php
-namespace webfiori\collections\tests;
+namespace WebFiori\Collections\Tests;
 
-use webfiori\collections\Stack;
-use webfiori\collections\tests\AnyObject;
+use WebFiori\Collections\Stack;
+use WebFiori\Collections\Tests\AnyObject;
 use PHPUnit\Framework\TestCase;
 /**
  * Description of StackTest
@@ -188,29 +188,29 @@ class StackTest extends TestCase {
      */
     public function testToString() {
         $stack = new Stack(5);
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."]"
                 ."",$stack.'');
         $stack->push('Hello');
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."    [0]=>Hello(string)\n"
                 ."]"
                 ."",$stack.'');
         $stack->push(new \Exception());
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."    [0]=>Hello(string),\n"
                 ."    [1]=>(object)\n"
                 ."]"
                 ."",$stack.'');
         $stack->push([]);
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."    [0]=>Hello(string),\n"
                 ."    [1]=>(object),\n"
                 ."    [2]=>(array)\n"
                 ."]"
                 ."",$stack.'');
         $stack->push(88.08);
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."    [0]=>Hello(string),\n"
                 ."    [1]=>(object),\n"
                 ."    [2]=>(array),\n"
@@ -218,7 +218,7 @@ class StackTest extends TestCase {
                 ."]"
                 ."",$stack.'');
         $stack->push('Another String.');
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."    [0]=>Hello(string),\n"
                 ."    [1]=>(object),\n"
                 ."    [2]=>(array),\n"
@@ -227,7 +227,7 @@ class StackTest extends TestCase {
                 ."]"
                 ."",$stack.'');
         $stack->pop();
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."    [0]=>Hello(string),\n"
                 ."    [1]=>(object),\n"
                 ."    [2]=>(array),\n"
@@ -235,25 +235,25 @@ class StackTest extends TestCase {
                 ."]"
                 ."",$stack.'');
         $stack->pop();
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."    [0]=>Hello(string),\n"
                 ."    [1]=>(object),\n"
                 ."    [2]=>(array)\n"
                 ."]"
                 ."",$stack.'');
         $stack->pop();
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."    [0]=>Hello(string),\n"
                 ."    [1]=>(object)\n"
                 ."]"
                 ."",$stack.'');
         $stack->pop();
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."    [0]=>Hello(string)\n"
                 ."]"
                 ."",$stack.'');
         $stack->pop();
-        $this->assertEquals("webfiori\collections\Stack[\n"
+        $this->assertEquals("WebFiori\Collections\Stack[\n"
                 ."]"
                 ."",$stack.'');
     }
