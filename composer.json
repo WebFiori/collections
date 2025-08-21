@@ -2,7 +2,7 @@
     "name": "webfiori/collections",
     "description": "Basic collections set used by WebFiori.",
     "type": "library",
-    "version": "1.1.5",
+    "version": "2.0.0",
     "require": {
         "php": ">=8.1"
     },
@@ -13,16 +13,15 @@
         "collections",
         "data structures"
     ],
-    "autoload" :{
-        "psr-4":{
-            "WebFiori\\Collections\\":"WebFiori/Collections/"
+    "autoload": {
+        "psr-4": {
+            "WebFiori\\Collections\\": "WebFiori/Collections/"
         }
     },
-    
     "require-dev": {
         "phpunit/phpunit": "^10"
     },
-    "scripts":{
+    "scripts": {
         "test": "vendor/bin/phpunit -c tests/phpunit.xml",
         "test10": "vendor/bin/phpunit -c tests/phpunit10.xml"
     },
