@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="bootstrap.php">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+         colors="true"
+         bootstrap="bootstrap.php">
+    
     <php>
     </php>
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true">
-            <file>../WebFiori/Collections/LinkedList.php</file>
-            <file>../WebFiori/Collections/Node.php</file>
-            <file>../WebFiori/Collections/Stack.php</file>
-            <file>../WebFiori/Collections/Queue.php</file>
-        </whitelist>
-    </filter>
-    <logging>
-        <log type="coverage-clover" target="clover.xml"/>
-    </logging>
+    
     <testsuites>
-        <testsuite name="Data Structures Tests">
+        <testsuite name="Collections Tests">
             <directory>./WebFiori/Collections</directory>
         </testsuite>
     </testsuites>
+    
+    <source>
+        <include>
+            <directory>../WebFiori/Collections</directory>
+        </include>
+    </source>
+    
+    <coverage>
+        <report>
+            <clover outputFile="clover.xml"/>
+        </report>
+    </coverage>
+    
 </phpunit>
