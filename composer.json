@@ -22,8 +22,7 @@
         "phpunit/phpunit": "^10"
     },
     "scripts": {
-        "test": "vendor/bin/phpunit -c tests/phpunit.xml",
-        "test10": "vendor/bin/phpunit -c tests/phpunit10.xml"
+        "test": "vendor/bin/phpunit -c tests/phpunit.xml"
     },
     "license": "MIT"
 }
