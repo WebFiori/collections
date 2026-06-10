@@ -2,7 +2,7 @@
 /**
  * This file is licensed under MIT License.
  *
- * Copyright (c) 2020 Ibrahim BinAlshikh
+ * Copyright (c) 2020 Webfiori Framework
  *
  * For more information on the license, please visit:
  * https://github.com/WebFiori/.github/blob/main/LICENSE
@@ -137,12 +137,12 @@ class Queue extends AbstractCollection {
     public function enqueue($el) : bool {
         if ($this->validateSize() && $el !== null) {
             if ($this->size() == 0) {
-                $this->head = new Node($el, self::$NULL);
+                $this->head = new Node($el, $this->null);
                 $this->size++;
 
                 return true;
             } else if ($this->size() == 1) {
-                $this->tail = new Node($el, self::$NULL);
+                $this->tail = new Node($el, $this->null);
                 $this->head->setNext($this->tail);
                 $this->size++;
 
@@ -153,7 +153,7 @@ class Queue extends AbstractCollection {
                 while ($node->next() !== null) {
                     $node = $node->next();
                 }
-                $this->tail = new Node($el, self::$NULL);
+                $this->tail = new Node($el, $this->null);
                 $node->setNext($this->tail);
                 $this->size++;
 

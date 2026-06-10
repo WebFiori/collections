@@ -2,7 +2,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2020 Ibrahim BinAlshikh, WebFiori Collections.
+ * Copyright (c) 2020 Webfiori Framework, WebFiori Collections.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal

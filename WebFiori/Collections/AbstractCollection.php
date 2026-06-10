@@ -2,7 +2,7 @@
 /**
  * This file is licensed under MIT License.
  *
- * Copyright (c) 2020 Ibrahim BinAlshikh
+ * Copyright (c) 2020 Webfiori Framework
  *
  * For more information on the license, please visit:
  * https://github.com/WebFiori/.github/blob/main/LICENSE
@@ -17,7 +17,6 @@ use Countable;
  * @author Ibrahim
  */
 abstract class AbstractCollection implements Countable {
-    public static $NULL = null;
     /**
      * Returns a string that represents the collection and its element.
      * 
