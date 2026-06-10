@@ -2,7 +2,7 @@
 /*
  * The MIT License
  *
- * Copyright (c) 2020 Webfiori Framework, WebFiori Collections.
+ * Copyright (c) 2020 Ibrahim BinAlshikh, WebFiori Collections.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -132,5 +132,62 @@ class NodeTest extends TestCase {
         $null = null;
         $node00->setNext($null);
         $this->assertTrue($node00->next() === null);
+    }
+    /**
+     * @test
+     */
+    public function testPrevDefaultNull() {
+        $data = 'hello';
+        $null = null;
+        $node = new Node($data, $null);
+        $this->assertNull($node->prev());
+    }
+    /**
+     * @test
+     */
+    public function testSetPrev() {
+        $d1 = 'first';
+        $d2 = 'second';
+        $null = null;
+        $node1 = new Node($d1, $null);
+        $node2 = new Node($d2, $null, $node1);
+        $this->assertSame($node1, $node2->prev());
+    }
+    /**
+     * @test
+     */
+    public function testSetPrevNull() {
+        $d1 = 'first';
+        $d2 = 'second';
+        $null = null;
+        $node1 = new Node($d1, $null);
+        $node2 = new Node($d2, $null, $node1);
+        $null2 = null;
+        $node2->setPrev($null2);
+        $this->assertNull($node2->prev());
+    }
+    /**
+     * @test
+     */
+    public function testDoublyLinkedChain() {
+        $d1 = 'A';
+        $d2 = 'B';
+        $d3 = 'C';
+        $null = null;
+        $node1 = new Node($d1, $null);
+        $node2 = new Node($d2, $null, $node1);
+        $node1->setNext($node2);
+        $node3 = new Node($d3, $null, $node2);
+        $node2->setNext($node3);
+
+        // Forward traversal
+        $this->assertEquals('A', $node1->data());
+        $this->assertEquals('B', $node1->next()->data());
+        $this->assertEquals('C', $node1->next()->next()->data());
+
+        // Backward traversal
+        $this->assertEquals('C', $node3->data());
+        $this->assertEquals('B', $node3->prev()->data());
+        $this->assertEquals('A', $node3->prev()->prev()->data());
     }
 }

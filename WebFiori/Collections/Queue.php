@@ -2,7 +2,7 @@
 /**
  * This file is licensed under MIT License.
  *
- * Copyright (c) 2020 Webfiori Framework
+ * Copyright (c) 2020 WebFiori Framework
  *
  * For more information on the license, please visit:
  * https://github.com/WebFiori/.github/blob/main/LICENSE
@@ -63,12 +63,7 @@ class Queue extends AbstractCollection {
         $this->tail = null;
         $this->null = null;
         $this->size = 0;
-
-        if (gettype($max) == 'integer') {
-            $this->max = $max;
-        } else {
-            $this->max = 0;
-        }
+        $this->max = $max;
     }
     /**
      * Returns the element that exist on the top of the queue.
@@ -95,6 +90,7 @@ class Queue extends AbstractCollection {
         if ($this->size > 1) {
             $data = $this->head->data();
             $this->head = $this->head->next();
+            $this->head->setPrev($this->null);
             $this->size--;
 
             return $data;
@@ -142,19 +138,15 @@ class Queue extends AbstractCollection {
 
                 return true;
             } else if ($this->size() == 1) {
-                $this->tail = new Node($el, $this->null);
+                $this->tail = new Node($el, $this->null, $this->head);
                 $this->head->setNext($this->tail);
                 $this->size++;
 
                 return true;
             } else {
-                $node = $this->head;
-
-                while ($node->next() !== null) {
-                    $node = $node->next();
-                }
-                $this->tail = new Node($el, $this->null);
-                $node->setNext($this->tail);
+                $oldTail = $this->tail;
+                $this->tail = new Node($el, $this->null, $oldTail);
+                $oldTail->setNext($this->tail);
                 $this->size++;
 
                 return true;
