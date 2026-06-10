@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.2](https://github.com/WebFiori/collections/compare/v2.0.1...v2.0.2) (2026-06-10)
+
+
+### Features
+
+* add doubly-linked node for O(1) removeLast/pop ([375f658](https://github.com/WebFiori/collections/commit/375f6582f7178da8f287311261119d323be550de))
+* add Vector class with ArrayAccess and JsonSerializable ([925f7de](https://github.com/WebFiori/collections/commit/925f7de77b2265762cc1fbe2265a0ac681cedbe6))
+* Add Vector class with O(1) index access ([715d002](https://github.com/WebFiori/collections/commit/715d002124f4a913b32142d372972ccc181ee9c4))
+* Added Support for Vector Data Structure ([3a2f0fd](https://github.com/WebFiori/collections/commit/3a2f0fd469e118c897a59b74aa75df8e471ea94a))
+* Doubly-linked node for O(1) removeLast/pop ([979cbad](https://github.com/WebFiori/collections/commit/979cbad35d507df017217bc54a79bf8b35f28d76))
+
+
+### Miscellaneous Chores
+
+* Merge pull request [#18](https://github.com/WebFiori/collections/issues/18) from WebFiori/dev ([7f11fb0](https://github.com/WebFiori/collections/commit/7f11fb0c9b5826e26220e9d6c8ccc3ed87d35cce))
+* Updated License Headers ([e700a54](https://github.com/WebFiori/collections/commit/e700a54d7c6350261f728441b67f094df2574a88))
+
 ## [2.0.1](https://github.com/WebFiori/collections/compare/v2.0.0...v2.0.1) (2026-06-02)
 
 
