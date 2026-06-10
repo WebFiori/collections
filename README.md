@@ -303,6 +303,19 @@ echo $retrieved["key"]; // "modified"
 - `peek(): mixed` - View front element without removing
 - `max(): int` - Get maximum capacity (-1 for unlimited)
 
+### Node Methods
+
+The `Node` class supports both singly and doubly linked usage:
+
+- `data(): mixed` - Get the stored data
+- `next(): ?Node` - Get the next node
+- `prev(): ?Node` - Get the previous node
+- `setData(mixed &$data): void` - Set the stored data
+- `setNext(?Node &$next): void` - Set the next node
+- `setPrev(?Node &$prev): void` - Set the previous node
+
+All collections use doubly-linked nodes internally, enabling O(1) `removeLast()` on LinkedList and O(1) `pop()` on Stack.
+
 
 ## License
 

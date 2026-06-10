@@ -2,7 +2,7 @@
 /**
  * This file is licensed under MIT License.
  *
- * Copyright (c) 2020 Ibrahim BinAlshikh
+ * Copyright (c) 2026 WebFiori Framework
  *
  * For more information on the license, please visit:
  * https://github.com/WebFiori/.github/blob/main/LICENSE
@@ -43,9 +43,9 @@ class Stack extends AbstractCollection {
     private $tail;
     /**
      * Constructs a new instance of the class.
-     * 
-     * @param int $max The maximum number of elements the stack can hold. 
-     * if a negative number is given or 0, the stack will have unlimited number 
+     *
+     * @param int $max The maximum number of elements the stack can hold.
+     * if a negative number is given or 0, the stack will have unlimited number
      * of elements. Also, if the given value is not an integer, the maximum will be set
      * to unlimited. Default is 0.
      */
@@ -54,19 +54,14 @@ class Stack extends AbstractCollection {
         $this->head = null;
         $this->tail = null;
         $this->size = 0;
-
-        if (gettype($max) == 'integer') {
-            $this->max = $max;
-        } else {
-            $this->max = 0;
-        }
+        $this->max = $max;
     }
     /**
      * Returns the element that exist on the top of the stack.
-     * 
+     *
      * This method will return the last element that was added to the stack.
-     * 
-     * @return mixed The element at the top. If the stack is empty, the method 
+     *
+     * @return mixed The element at the top. If the stack is empty, the method
      * will return null.
      */
     public function &peek() {
@@ -80,10 +75,11 @@ class Stack extends AbstractCollection {
     }
     /**
      * Removes an element from the top of the stack.
-     * 
+     *
      * The method will remove the last element that was added to the stack.
-     * 
-     * @return mixed The element after removal from the stack. If the stack is 
+     * This operation is O(1).
+     *
+     * @return mixed The element after removal from the stack. If the stack is
      * empty, the method will return null.
      */
     public function &pop() {
@@ -97,16 +93,9 @@ class Stack extends AbstractCollection {
 
             return $data;
         } else {
-            $node = $this->head;
-            $nextNode = $this->head->next();
-
-            while ($nextNode->next() !== null) {
-                $node = $nextNode;
-                $nextNode = $nextNode->next();
-            }
-            $data = $nextNode->data();
-            $node->setNext($this->null);
-            $this->tail = $node;
+            $data = $this->tail->data();
+            $this->tail = $this->tail->prev();
+            $this->tail->setNext($this->null);
             $this->size--;
 
             return $data;
@@ -114,13 +103,13 @@ class Stack extends AbstractCollection {
     }
     /**
      * Returns the number of maximum elements the stack can hold.
-     * 
-     * @return int If the maximum number of elements was set to 0 or a 
-     * negative number, the method will return -1 which indicates that 
-     * the stack can have infinite number of elements. Other than that, 
+     *
+     * @return int If the maximum number of elements was set to 0 or a
+     * negative number, the method will return -1 which indicates that
+     * the stack can have infinite number of elements. Other than that,
      * the method will return the maximum number of elements.
      */
-    public function max() : int {
+    public function max(): int {
         if ($this->max <= 0) {
             return -1;
         }
@@ -129,46 +118,46 @@ class Stack extends AbstractCollection {
     }
     /**
      * Adds new element to the top of the stack.
-     * 
-     * @param mixed $el The element that will be added. If it is null, the 
+     *
+     * @param mixed $el The element that will be added. If it is null, the
      * method will not add it.
-     * 
+     *
      * @return bool The method will return true if the element is added.
-     * The method will return false only in two cases, If the maximum 
-     * number of elements is reached and trying to add new one or the given element 
+     * The method will return false only in two cases, If the maximum
+     * number of elements is reached and trying to add new one or the given element
      * is null.
      */
-    public function add(&$el) : bool {
+    public function add(&$el): bool {
         return $this->push($el);
     }
     /**
      * Adds new element to the top of the stack.
-     * 
-     * @param mixed $el The element that will be added. If it is null, the 
+     *
+     * @param mixed $el The element that will be added. If it is null, the
      * method will not add it.
-     * 
+     *
      * @return bool The method will return true if the element is added.
-     * The method will return false only in two cases, If the maximum 
-     * number of elements is reached and trying to add new one or the given element 
+     * The method will return false only in two cases, If the maximum
+     * number of elements is reached and trying to add new one or the given element
      * is null.
      */
-    public function push($el) : bool {
+    public function push($el): bool {
         if ($el !== null && $this->validateSize()) {
             if ($this->size() == 0) {
-                $this->head = new Node($el, self::$NULL);
+                $this->head = new Node($el, $this->null);
                 $this->size++;
 
                 return true;
             } else if ($this->size() == 1) {
-                $this->tail = new Node($el, self::$NULL);
+                $this->tail = new Node($el, $this->null, $this->head);
                 $this->head->setNext($this->tail);
                 $this->size++;
 
                 return true;
             } else {
-                $node = $this->tail;
-                $this->tail = new Node($el, self::$NULL);
-                $node->setNext($this->tail);
+                $oldTail = $this->tail;
+                $this->tail = new Node($el, $this->null, $oldTail);
+                $oldTail->setNext($this->tail);
                 $this->size++;
 
                 return true;
@@ -180,19 +169,19 @@ class Stack extends AbstractCollection {
 
     /**
      * Returns the number of elements in the stack.
-     * 
+     *
      * @return int The number of elements in the stack.
      */
-    public function size() : int {
+    public function size(): int {
         return $this->size;
     }
 
     /**
      * Returns an indexed array that contains the elements of the stack.
-     * 
+     *
      * @return array An indexed array that contains the elements of the stack.
      */
-    public function toArray() : array {
+    public function toArray(): array {
         $elsArray = [];
 
         if ($this->size() == 1) {
@@ -213,10 +202,10 @@ class Stack extends AbstractCollection {
     }
     /**
      * Checks if the stack can hold more elements or not.
-     * 
+     *
      * @return bool true if the stack can hold more elements.
      */
-    private function validateSize() : bool {
+    private function validateSize(): bool {
         $maxSize = $this->max();
 
         if ($maxSize == -1) {

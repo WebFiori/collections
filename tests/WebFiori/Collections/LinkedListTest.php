@@ -1657,4 +1657,37 @@ class LinkedListTest extends TestCase {
         $list->add($arr00);
         //$this->assertEquals("WebFiori\Collections\LinkedList[\n    [0]=>(object),\n    [1]=>(object),\n     [2]=>(array),\n    [3]=>(array)\n]",$list.'');
     }
+    /**
+     * @test
+     */
+    public function testRemoveElementSingleElementList() {
+        $list = new LinkedList();
+        $el = 'only';
+        $list->add($el);
+        $removed = $list->removeElement($el);
+        $this->assertEquals('only', $removed);
+        $this->assertEquals(0, $list->size());
+    }
+    /**
+     * @test
+     */
+    public function testInsertionSortNonComparableObject() {
+        $list = new LinkedList();
+        $obj = new \stdClass();
+        $list->add($obj);
+        $obj2 = new \stdClass();
+        $list->add($obj2);
+        $this->assertFalse($list->insertionSort());
+    }
+    /**
+     * @test
+     */
+    public function testInsertionSortUnsortableType() {
+        $list = new LinkedList();
+        $a = true;
+        $b = false;
+        $list->add($a);
+        $list->add($b);
+        $this->assertFalse($list->insertionSort());
+    }
 }
