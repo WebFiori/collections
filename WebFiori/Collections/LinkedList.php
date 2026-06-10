@@ -2,7 +2,7 @@
 /**
  * This file is licensed under MIT License.
  *
- * Copyright (c) 2020 Ibrahim BinAlshikh
+ * Copyright (c) 2020 WebFiori Framework
  *
  * For more information on the license, please visit:
  * https://github.com/WebFiori/.github/blob/main/LICENSE
@@ -141,16 +141,9 @@ class LinkedList extends AbstractCollection implements Iterator {
         if ($this->size() == 1) {
             return $this->removeFirst();
         } else if ($this->size() > 1) {
-            $nextNode = &$this->head->next();
-            $node = $this->head;
-
-            while ($nextNode->next() != null) {
-                $node = $nextNode;
-                $nextNode = &$nextNode->next();
-            }
-            $data = &$nextNode->data();
-            $node->setNext($this->null);
-            $this->tail = $node;
+            $data = &$this->tail->data();
+            $this->tail = $this->tail->prev();
+            $this->tail->setNext($this->null);
             $this->_reduceSize();
 
             return $data;
@@ -175,6 +168,7 @@ class LinkedList extends AbstractCollection implements Iterator {
         } else if ($this->size() > 1) {
             $data = &$this->head->data();
             $this->head = &$this->head->next();
+            $this->head->setPrev($this->null);
             $this->_reduceSize();
 
             return $data;
@@ -209,7 +203,12 @@ class LinkedList extends AbstractCollection implements Iterator {
                 for ($i = 1 ; ; $i++) {
                     if ($i == $index) {
                         $data = $nextNode->data();
-                        $node->setNext($nextNode->next());
+                        $afterRemoved = $nextNode->next();
+                        $node->setNext($afterRemoved);
+
+                        if ($afterRemoved !== null) {
+                            $afterRemoved->setPrev($node);
+                        }
                         $this->_reduceSize();
 
                         return $data;
@@ -265,24 +264,20 @@ class LinkedList extends AbstractCollection implements Iterator {
     public function add(&$el) : bool {
         if ($this->validateSize()) {
             if ($this->head == null) {
-                $this->head = new Node($el, self::$NULL);
+                $this->head = new Node($el, $this->null);
                 $this->size = 1;
 
                 return true;
             } else if ($this->size() == 1) {
-                $this->tail = new Node($el, self::$NULL);
+                $this->tail = new Node($el, $this->null, $this->head);
                 $this->head->setNext($this->tail);
                 $this->size++;
 
                 return true;
             } else {
-                $node = $this->head;
-
-                while ($node->next() != null) {
-                    $node = $node->next();
-                }
-                $this->tail = new Node($el, self::$NULL);
-                $node->setNext($this->tail);
+                $oldTail = $this->tail;
+                $this->tail = new Node($el, $this->null, $oldTail);
+                $oldTail->setNext($this->tail);
                 $this->size++;
 
                 return true;
@@ -445,7 +440,7 @@ class LinkedList extends AbstractCollection implements Iterator {
                 $retVal = true;
             } else if ($listSize == 1 && $position == 1) {
                 //list size is 1 and position = 1. inser at the end.
-                $newNode = new Node($el, self::$NULL);
+                $newNode = new Node($el, $this->null, $this->head);
                 $this->tail = $newNode;
                 $this->head->setNext($this->tail);
                 $this->size++;
@@ -714,7 +709,12 @@ class LinkedList extends AbstractCollection implements Iterator {
             $data = &$nextNode->data();
 
             if ($data === $val) {
-                $node->setNext($nextNode->next());
+                $afterRemoved = $nextNode->next();
+                $node->setNext($afterRemoved);
+
+                if ($afterRemoved !== null) {
+                    $afterRemoved->setPrev($node);
+                }
                 $this->_reduceSize();
 
                 return $data;
@@ -741,7 +741,11 @@ class LinkedList extends AbstractCollection implements Iterator {
 
         while ($currentNode !== null) {
             if ($pointer == $position) {
-                $newNode = new Node($el,$nextToCurrent);
+                $newNode = new Node($el, $nextToCurrent, $currentNode);
+
+                if ($nextToCurrent !== null) {
+                    $nextToCurrent->setPrev($newNode);
+                }
                 $currentNode->setNext($newNode);
                 $this->size++;
 
@@ -765,8 +769,13 @@ class LinkedList extends AbstractCollection implements Iterator {
      * @param bool $noTail Whether to update tail pointer.
      */
     private function _insertStart(&$el, $noTail = true) {
-        $newNode = new Node($el, $this->head);
+        $oldHead = $this->head;
+        $newNode = new Node($el, $oldHead);
         $this->head = $newNode;
+
+        if ($oldHead !== null) {
+            $oldHead->setPrev($newNode);
+        }
 
         if ($noTail) {
             $this->tail = $this->head->next();

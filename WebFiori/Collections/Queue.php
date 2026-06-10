@@ -2,7 +2,7 @@
 /**
  * This file is licensed under MIT License.
  *
- * Copyright (c) 2020 Ibrahim BinAlshikh
+ * Copyright (c) 2020 WebFiori Framework
  *
  * For more information on the license, please visit:
  * https://github.com/WebFiori/.github/blob/main/LICENSE
@@ -63,12 +63,7 @@ class Queue extends AbstractCollection {
         $this->tail = null;
         $this->null = null;
         $this->size = 0;
-
-        if (gettype($max) == 'integer') {
-            $this->max = $max;
-        } else {
-            $this->max = 0;
-        }
+        $this->max = $max;
     }
     /**
      * Returns the element that exist on the top of the queue.
@@ -95,6 +90,7 @@ class Queue extends AbstractCollection {
         if ($this->size > 1) {
             $data = $this->head->data();
             $this->head = $this->head->next();
+            $this->head->setPrev($this->null);
             $this->size--;
 
             return $data;
@@ -137,24 +133,20 @@ class Queue extends AbstractCollection {
     public function enqueue($el) : bool {
         if ($this->validateSize() && $el !== null) {
             if ($this->size() == 0) {
-                $this->head = new Node($el, self::$NULL);
+                $this->head = new Node($el, $this->null);
                 $this->size++;
 
                 return true;
             } else if ($this->size() == 1) {
-                $this->tail = new Node($el, self::$NULL);
+                $this->tail = new Node($el, $this->null, $this->head);
                 $this->head->setNext($this->tail);
                 $this->size++;
 
                 return true;
             } else {
-                $node = $this->head;
-
-                while ($node->next() !== null) {
-                    $node = $node->next();
-                }
-                $this->tail = new Node($el, self::$NULL);
-                $node->setNext($this->tail);
+                $oldTail = $this->tail;
+                $this->tail = new Node($el, $this->null, $oldTail);
+                $oldTail->setNext($this->tail);
                 $this->size++;
 
                 return true;
