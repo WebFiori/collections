@@ -155,19 +155,19 @@ class Stack extends AbstractCollection {
     public function push($el) : bool {
         if ($el !== null && $this->validateSize()) {
             if ($this->size() == 0) {
-                $this->head = new Node($el, self::$NULL);
+                $this->head = new Node($el, $this->null);
                 $this->size++;
 
                 return true;
             } else if ($this->size() == 1) {
-                $this->tail = new Node($el, self::$NULL);
+                $this->tail = new Node($el, $this->null);
                 $this->head->setNext($this->tail);
                 $this->size++;
 
                 return true;
             } else {
                 $node = $this->tail;
-                $this->tail = new Node($el, self::$NULL);
+                $this->tail = new Node($el, $this->null);
                 $node->setNext($this->tail);
                 $this->size++;
 

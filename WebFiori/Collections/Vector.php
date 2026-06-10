@@ -11,7 +11,9 @@
 
 namespace WebFiori\Collections;
 
+use ArrayAccess;
 use Iterator;
+use JsonSerializable;
 use OutOfRangeException;
 
 /**
@@ -19,7 +21,7 @@ use OutOfRangeException;
  *
  * @author Ibrahim
  */
-class Vector extends AbstractCollection implements Iterator {
+class Vector extends AbstractCollection implements Iterator, ArrayAccess, JsonSerializable {
     /**
      * The array that holds the elements.
      *
@@ -226,5 +228,65 @@ class Vector extends AbstractCollection implements Iterator {
 
     public function valid(): bool {
         return $this->position < count($this->elements);
+    }
+
+    /**
+     * Returns data for JSON serialization.
+     *
+     * @return array The elements array.
+     */
+    public function jsonSerialize(): array {
+        return $this->elements;
+    }
+
+    /**
+     * Whether an offset exists.
+     *
+     * @param mixed $offset The offset to check.
+     *
+     * @return bool True if the offset exists.
+     */
+    public function offsetExists(mixed $offset): bool {
+        return is_int($offset) && $offset >= 0 && $offset < count($this->elements);
+    }
+
+    /**
+     * Returns the element at the given offset.
+     *
+     * @param mixed $offset The offset to retrieve.
+     *
+     * @return mixed The element at the offset.
+     *
+     * @throws OutOfRangeException If the offset is invalid.
+     */
+    public function offsetGet(mixed $offset): mixed {
+        return $this->get($offset);
+    }
+
+    /**
+     * Sets the element at the given offset.
+     *
+     * If offset is null, the element is appended.
+     *
+     * @param mixed $offset The offset to set.
+     * @param mixed $value The value to set.
+     */
+    public function offsetSet(mixed $offset, mixed $value): void {
+        if ($offset === null) {
+            $this->elements[] = $value;
+        } else {
+            $this->set($offset, $value);
+        }
+    }
+
+    /**
+     * Removes the element at the given offset.
+     *
+     * @param mixed $offset The offset to remove.
+     *
+     * @throws OutOfRangeException If the offset is invalid.
+     */
+    public function offsetUnset(mixed $offset): void {
+        $this->removeAt($offset);
     }
 }

@@ -293,4 +293,69 @@ class VectorTest extends TestCase {
         $v->add($b);
         $this->assertCount(2, $v);
     }
+    /**
+     * @test
+     */
+    public function testArrayAccessGet() {
+        $v = new Vector();
+        $a = 'hello';
+        $v->add($a);
+        $this->assertEquals('hello', $v[0]);
+    }
+    /**
+     * @test
+     */
+    public function testArrayAccessSet() {
+        $v = new Vector();
+        $a = 'old';
+        $v->add($a);
+        $v[0] = 'new';
+        $this->assertEquals('new', $v->get(0));
+    }
+    /**
+     * @test
+     */
+    public function testArrayAccessAppend() {
+        $v = new Vector();
+        $v[] = 'first';
+        $v[] = 'second';
+        $this->assertEquals(2, $v->size());
+        $this->assertEquals('first', $v[0]);
+        $this->assertEquals('second', $v[1]);
+    }
+    /**
+     * @test
+     */
+    public function testArrayAccessIsset() {
+        $v = new Vector();
+        $a = 'x';
+        $v->add($a);
+        $this->assertTrue(isset($v[0]));
+        $this->assertFalse(isset($v[1]));
+        $this->assertFalse(isset($v[-1]));
+    }
+    /**
+     * @test
+     */
+    public function testArrayAccessUnset() {
+        $v = new Vector();
+        $a = 'A';
+        $b = 'B';
+        $v->add($a);
+        $v->add($b);
+        unset($v[0]);
+        $this->assertEquals(1, $v->size());
+        $this->assertEquals('B', $v[0]);
+    }
+    /**
+     * @test
+     */
+    public function testJsonSerialize() {
+        $v = new Vector();
+        $a = 'hello';
+        $b = 42;
+        $v->add($a);
+        $v->add($b);
+        $this->assertEquals('["hello",42]', json_encode($v));
+    }
 }

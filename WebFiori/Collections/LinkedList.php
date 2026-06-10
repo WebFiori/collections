@@ -265,12 +265,12 @@ class LinkedList extends AbstractCollection implements Iterator {
     public function add(&$el) : bool {
         if ($this->validateSize()) {
             if ($this->head == null) {
-                $this->head = new Node($el, self::$NULL);
+                $this->head = new Node($el, $this->null);
                 $this->size = 1;
 
                 return true;
             } else if ($this->size() == 1) {
-                $this->tail = new Node($el, self::$NULL);
+                $this->tail = new Node($el, $this->null);
                 $this->head->setNext($this->tail);
                 $this->size++;
 
@@ -281,7 +281,7 @@ class LinkedList extends AbstractCollection implements Iterator {
                 while ($node->next() != null) {
                     $node = $node->next();
                 }
-                $this->tail = new Node($el, self::$NULL);
+                $this->tail = new Node($el, $this->null);
                 $node->setNext($this->tail);
                 $this->size++;
 
@@ -445,7 +445,7 @@ class LinkedList extends AbstractCollection implements Iterator {
                 $retVal = true;
             } else if ($listSize == 1 && $position == 1) {
                 //list size is 1 and position = 1. inser at the end.
-                $newNode = new Node($el, self::$NULL);
+                $newNode = new Node($el, $this->null);
                 $this->tail = $newNode;
                 $this->head->setNext($this->tail);
                 $this->size++;
