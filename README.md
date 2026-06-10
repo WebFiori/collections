@@ -18,9 +18,40 @@ Basic data structures used by WebFiori framework.
   <a href="https://packagist.org/packages/webfiori/collections">
       <img src="https://img.shields.io/packagist/dt/webfiori/collections?color=light-green">
   </a>
+  <img src="https://img.shields.io/badge/php-%3E%3D8.1-blue" alt="PHP 8.1+">
 </p>
 
+## Table of Contents
+
+- [Key Features](#key-features)
+- [Supported PHP Versions](#supported-php-versions)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+  - [LinkedList](#linkedlist)
+  - [Stack](#stack)
+  - [Queue](#queue)
+  - [Vector](#vector)
+- [Advanced Usage](#advanced-usage)
+- [API Reference](#api-reference)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+- [Changelog](#changelog)
+
+## Key Features
+
+- **LinkedList** — Doubly-linked list with O(1) add/removeLast and full iterator support
+- **Stack** — LIFO structure with O(1) push/pop
+- **Queue** — FIFO structure with O(1) enqueue/dequeue
+- **Vector** — Array-backed list with O(1) index access, `ArrayAccess`, and `JsonSerializable`
+- All collections implement `Countable`
+- Optional size limits on all collections
+- Sorting support via `Comparable` interface
+
 ## Supported PHP Versions
+
 |                                                                                               Build Status                                                                                                |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | <a target="_blank" href="https://github.com/WebFiori/collections/actions/workflows/php81.yaml"><img src="https://github.com/WebFiori/collections/actions/workflows/php81.yaml/badge.svg?branch=main"></a> |
@@ -28,17 +59,45 @@ Basic data structures used by WebFiori framework.
 | <a target="_blank" href="https://github.com/WebFiori/collections/actions/workflows/php83.yaml"><img src="https://github.com/WebFiori/collections/actions/workflows/php83.yaml/badge.svg?branch=main"></a> |
 | <a target="_blank" href="https://github.com/WebFiori/collections/actions/workflows/php84.yaml"><img src="https://github.com/WebFiori/collections/actions/workflows/php84.yaml/badge.svg?branch=main"></a> |
 
-## Supported Collections
-* Linked List
-* Stack
-* Queue
-
 ## Installation
-
-You can install the library through Composer:
 
 ```bash
 composer require webfiori/collections
+```
+
+## Quick Start
+
+```php
+<?php
+use WebFiori\Collections\LinkedList;
+use WebFiori\Collections\Stack;
+use WebFiori\Collections\Queue;
+use WebFiori\Collections\Vector;
+
+// LinkedList — doubly-linked, iterable
+$list = new LinkedList();
+$list->add("A");
+$list->add("B");
+echo $list->get(0); // "A"
+
+// Stack — LIFO
+$stack = new Stack();
+$stack->push("Bottom");
+$stack->push("Top");
+echo $stack->pop(); // "Top"
+
+// Queue — FIFO
+$queue = new Queue();
+$queue->enqueue("First");
+$queue->enqueue("Second");
+echo $queue->dequeue(); // "First"
+
+// Vector — O(1) index access, array bracket syntax
+$vector = new Vector();
+$vector[] = "Hello";
+$vector[] = "World";
+echo $vector[0]; // "Hello"
+echo json_encode($vector); // ["Hello","World"]
 ```
 
 ## Usage
@@ -193,6 +252,56 @@ $limitedQueue = new Queue(100);
 $success = $limitedQueue->enqueue("Item");
 ```
 
+### Vector
+
+The `Vector` class provides an array-backed list with O(1) index access.
+
+```php
+<?php
+use WebFiori\Collections\Vector;
+
+// Create a new vector
+$vector = new Vector();
+
+// Add elements
+$vector->add("First");
+$vector->add("Second");
+
+// O(1) index access
+echo $vector->get(0); // "First"
+
+// Set element at index
+$vector->set(0, "Modified");
+
+// Insert at position
+$vector->insert("Middle", 1);
+
+// Remove by index or value
+$vector->removeAt(0);
+$vector->remove("Middle");
+
+// Array bracket syntax (ArrayAccess)
+$vector[] = "New";
+$vector[0] = "Replaced";
+echo $vector[0]; // "Replaced"
+isset($vector[0]); // true
+unset($vector[0]);
+
+// JSON serialization
+echo json_encode($vector); // ["New"]
+
+// Find elements
+$index = $vector->indexOf("New"); // 0 or -1 if not found
+
+// Replace
+$vector->replace("New", "Newer");
+
+// Iterate
+foreach ($vector as $index => $value) {
+    echo "$index: $value\n";
+}
+```
+
 ## Advanced Usage
 
 ### Custom Object Sorting
@@ -218,7 +327,6 @@ class Person implements Comparable {
             return 1;
         }
         
-        // Compare by age
         if ($this->age == $other->age) {
             return 0;
         }
@@ -278,7 +386,7 @@ echo $retrieved["key"]; // "modified"
 - `getLast(): mixed` - Get last element
 - `remove($index): mixed` - Remove element at index
 - `removeFirst(): mixed` - Remove first element
-- `removeLast(): mixed` - Remove last element
+- `removeLast(): mixed` - Remove last element (O(1))
 - `removeElement(&$element): mixed` - Remove specific element
 - `insert(&$element, $position): bool` - Insert at position
 - `indexOf($element): int` - Find element index
@@ -292,7 +400,7 @@ echo $retrieved["key"]; // "modified"
 ### Stack Specific Methods
 
 - `push($element): bool` - Add element to top
-- `pop(): mixed` - Remove and return top element
+- `pop(): mixed` - Remove and return top element (O(1))
 - `peek(): mixed` - View top element without removing
 - `max(): int` - Get maximum capacity (-1 for unlimited)
 
@@ -302,6 +410,19 @@ echo $retrieved["key"]; // "modified"
 - `dequeue(): mixed` - Remove and return front element
 - `peek(): mixed` - View front element without removing
 - `max(): int` - Get maximum capacity (-1 for unlimited)
+
+### Vector Specific Methods
+
+- `get(int $index): mixed` - Get element at index (O(1))
+- `set(int $index, mixed $element): void` - Set element at index
+- `insert(mixed $element, int $index): void` - Insert at position
+- `removeAt(int $index): mixed` - Remove element at index
+- `remove(mixed $element): mixed` - Remove first occurrence
+- `indexOf(mixed $element): int` - Find element index (-1 if not found)
+- `replace(mixed $old, mixed $new): bool` - Replace first occurrence
+- `clear(): void` - Remove all elements
+- `jsonSerialize(): array` - JSON serialization support
+- Implements `ArrayAccess`: `$vector[0]`, `$vector[] = x`, `isset($vector[0])`, `unset($vector[0])`
 
 ### Node Methods
 
@@ -316,7 +437,28 @@ The `Node` class supports both singly and doubly linked usage:
 
 All collections use doubly-linked nodes internally, enabling O(1) `removeLast()` on LinkedList and O(1) `pop()` on Stack.
 
+## Testing
+
+```bash
+# Install dependencies
+composer install
+
+# Run tests
+composer test
+```
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request on [GitHub](https://github.com/WebFiori/collections).
 
 ## License
 
 This library is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Support
+
+If you encounter any issues, please [open an issue](https://github.com/WebFiori/collections/issues) on GitHub.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a list of changes.
